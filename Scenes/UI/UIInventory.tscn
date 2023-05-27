@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://Scripts/UI/UIInventory.gd" type="Script" id=1]
 [ext_resource path="res://Assets/UI/Icons/ArrowRight.png" type="Texture" id=2]
@@ -9,7 +9,6 @@
 [ext_resource path="res://Assets/Sounds/switch_006.ogg" type="AudioStream" id=7]
 [ext_resource path="res://Scenes/UI/Elements/UIInventoryItemContextMenu.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Scenes/UI/Elements/UIItemInfo.tscn" type="PackedScene" id=9]
-[ext_resource path="res://Scenes/UI/Elements/UICharacterItemSlots.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Assets/Sounds/switch_007.ogg" type="AudioStream" id=11]
 [ext_resource path="res://Assets/Sounds/cloth-inventory.wav" type="AudioStream" id=12]
 [ext_resource path="res://Assets/Sounds/click-less-pitch.ogg" type="AudioStream" id=13]
@@ -285,14 +284,11 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="UIItemInfo" parent="HBoxMain/ControlInfoColumn" instance=ExtResource( 9 )]
-
-[node name="UICharacterItemSlots" parent="HBoxMain/ControlInfoColumn" instance=ExtResource( 10 )]
-anchor_left = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.0
-margin_left = -137.0
-margin_right = 137.0
-margin_bottom = 274.0
+margin_left = -1.0
+margin_top = -285.0
+margin_right = 519.0
+margin_bottom = -105.0
+rect_min_size = Vector2( 520, 180 )
 
 [node name="UIContextMenuContainer" type="Control" parent="."]
 visible = false

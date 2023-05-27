@@ -17,7 +17,7 @@ onready var _equipped_boots : TextureRect = $SlotBoots/UIFrame/TextureRect/Textu
 
 
 func _ready():
-	_sync_equipped_items()
+	#_sync_equipped_items()
 	Events.connect("on_item_equipped", self, "_on_item_equipped")
 	Events.connect("on_item_unequipped", self, "_on_item_unequipped")
 
@@ -55,9 +55,11 @@ func _sync_item(item_type_property_suffix : String) -> void:
 
 
 func _on_item_equipped(_item : EntityItem) -> void:
-	_sync_equipped_items()
+	#_sync_equipped_items()
+	pass
 	
 	
 func _on_item_unequipped(_item : EntityItem) -> void:
-	_sync_equipped_items()
+	#_sync_equipped_items()
+	pass
 	
