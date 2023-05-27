@@ -24,7 +24,7 @@ onready var _control_category_label_parent := $HBoxMain/ControlItemsColumn/VBoxI
 onready var _label_category_name : Label = $HBoxMain/ControlItemsColumn/VBoxItemsColumn/VBoxInventoryCategories/ControlCategoryLabelParent/LabelCategoryName
 onready var _timer_category_name : Timer = $HBoxMain/ControlItemsColumn/VBoxItemsColumn/VBoxInventoryCategories/ControlCategoryLabelParent/TimerCategoryName
 
-var _ui_inventory_category := preload("res://Scenes/UI/Elements/UIInventoryCategory.tscn")
+#var _ui_inventory_category := preload("res://Scenes/UI/Elements/UIInventoryCategory.tscn")
 
 var _category_displays_to_pages := {}
 var _category_displays_to_ui := {}
@@ -94,8 +94,8 @@ func _reload() -> void:
 
 func _reload_categories() -> void:
 	# Clear all categories
-	for child in _grid_categories.get_children():
-		_grid_categories.remove_child(child)
+	#for child in _grid_categories.get_children():
+	#	_grid_categories.remove_child(child)
 	
 	# First implement without sorting, then talk about how
 	# to display in a certain order: rename category display data files
@@ -103,9 +103,9 @@ func _reload_categories() -> void:
 	
 	# Dynamically load and place the category buttons	
 	for category_display in GameState.get_item_category_displays():
-		var ui = _ui_inventory_category.instance()
-		ui.set_name(category_display.display_name)
-		_grid_categories.add_child(ui)
+		#var ui = _ui_inventory_category.instance()
+		#ui.set_name(category_display.display_name)
+		#_grid_categories.add_child(ui)
 		
 		# Only add button events if the categories involved in this display
 		# have any item, otherwise, show the display, but with disabled
@@ -113,15 +113,17 @@ func _reload_categories() -> void:
 		if GameState.count_inventory_items_from_category_display(category_display) > 0:
 			# It has to be done here, after add_child,
 			# because then the node is ready
-			var button = ui.get_button()
-			button.connect("mouse_entered", self, "_on_button_category_mouse_entered", [ui])
-			button.connect("mouse_exited", self, "_on_button_category_mouse_exited", [ui])
-			button.connect("pressed", self, "_on_button_category_pressed", [
-				ui, _category_displays_to_pages.get(category_display)
-			])
+			#var button = ui.get_button()
+			#button.connect("mouse_entered", self, "_on_button_category_mouse_entered", [ui])
+			#button.connect("mouse_exited", self, "_on_button_category_mouse_exited", [ui])
+			#button.connect("pressed", self, "_on_button_category_pressed", [
+			#	ui, _category_displays_to_pages.get(category_display)
+			#])
+			pass
 		
-		ui.set_category(category_display)
-		_category_displays_to_ui[category_display] = ui
+		#ui.set_category(category_display)
+		#_category_displays_to_ui[category_display] = ui
+		pass
 
 
 func _set_active_category_display() -> void:
@@ -396,11 +398,11 @@ func _setup_context_menu() -> void:
 	# Position Context Menu in the center of the inventory
 	# (aligned with the middle category icon)
 	
-	var middle_idx = int(ceil(_grid_categories.get_child_count() / 2))
-	var middle_category = _grid_categories.get_children()[middle_idx]
-	var x = middle_category.get_global_position().x + (middle_category.get_size().x / 2) - (_context_menu.get_size().x / 2)	
-	_context_menu.set_deferred("rect_global_position", Vector2(x, _context_menu.get_global_position().y))
-		
+	#var middle_idx = int(ceil(_grid_categories.get_child_count() / 2))
+	#var middle_category = _grid_categories.get_children()[middle_idx]
+	#var x = middle_category.get_global_position().x + (middle_category.get_size().x / 2) - (_context_menu.get_size().x / 2)
+	#_context_menu.set_deferred("rect_global_position", Vector2(x, _context_menu.get_global_position().y))
+
 	if not _context_menu.get_button_equip().is_connected("pressed", self, "_on_context_menu_button_equip_pressed"):
 		_context_menu.get_button_equip().connect("pressed", self, "_on_context_menu_button_equip_pressed")
 		_context_menu.get_button_cancel().connect("pressed", self, "_on_context_menu_button_cancel_pressed")
