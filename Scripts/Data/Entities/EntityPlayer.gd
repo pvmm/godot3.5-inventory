@@ -36,15 +36,8 @@ func get_equipped_property_for_category_type(category_type : int) -> String:
 	var property := ""
 	
 	match category_type:
-		Types.ItemCategoryTypes.Helmets: property = "equipped_helmet"
-		Types.ItemCategoryTypes.Armors: property = "equipped_armor"
-		Types.ItemCategoryTypes.Gloves: property = "equipped_gloves"
-		Types.ItemCategoryTypes.Boots: property = "equipped_boots"
-		Types.ItemCategoryTypes.Shields: property = "equipped_off_hand"		
-		Types.ItemCategoryTypes.OneHandedWeapons: property = "equipped_weapon"
-		Types.ItemCategoryTypes.TwoHandedWeapons: property = "equipped_weapon"
-		Types.ItemCategoryTypes.Bows: property = "equipped_weapon"
-		Types.ItemCategoryTypes.Arrows: property = "equipped_ammo"
+		#Types.ItemCategoryTypes.Armors: property = "equipped_armor"
+		Types.ItemCategoryTypes.Weapons: property = "equipped_weapon"
 	
 	return property
 	

@@ -44,6 +44,7 @@ static func load_resources_from_path(path) -> Array:
 	var resources = []
 	
 	for filename in get_file_names_from_path(path, "tres"):
+		print(filename)
 		resources.append(load(path + "/" + filename))
 		
 	return resources	

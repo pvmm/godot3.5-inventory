@@ -92,19 +92,6 @@ func player_equip_item(item : EntityItem) -> void:
 	player_data.set(property, item)
 	Events.emit_signal("on_item_equipped", item)
 	
-	var has_equipped_two_handed = player_data.equipped_weapon and player_data.equipped_weapon.is_two_handed()	
-	var is_equipping_two_handed = item.is_two_handed()
-	
-	# TwoHandedWeapon has been just equipped, but the player has a OffHand equipped,
-	# unequip the off hand (currently only Shield)
-	if (is_equipping_two_handed and player_data.equipped_off_hand):
-		player_unequip_item(player_data.equipped_off_hand)
-		
-	# Shield has been just equipped, but the player has a TwoHandedWeapon equipped,
-	# unequip the weapon
-	elif (item.category_type == Types.ItemCategoryTypes.Shields and has_equipped_two_handed):
-		player_unequip_item(player_data.equipped_weapon)
-	
 	
 func player_unequip_item(item : EntityItem) -> void:
 	var property = player_data.get_equipped_property_for_item(item)

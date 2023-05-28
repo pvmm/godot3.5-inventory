@@ -1,19 +1,19 @@
 extends Control
 
-onready var _placeholder_helmet := $SlotHelmet/UIFrame/TextureRect/TexturePlaceholder
-onready var _equipped_helmet : TextureRect = $SlotHelmet/UIFrame/TextureRect/TextureEquipped
-onready var _placeholder_armor := $SlotArmor/UIFrame/TextureRect/TexturePlaceholder
-onready var _equipped_armor : TextureRect = $SlotArmor/UIFrame/TextureRect/TextureEquipped
-onready var _placeholder_gloves := $SlotGloves/UIFrame/TextureRect/TexturePlaceholder
-onready var _equipped_gloves : TextureRect = $SlotGloves/UIFrame/TextureRect/TextureEquipped
-onready var _placeholder_weapon := $SlotWeapon/UIFrame/TextureRect/TexturePlaceholder
-onready var _equipped_weapon : TextureRect = $SlotWeapon/UIFrame/TextureRect/TextureEquipped
-onready var _placeholder_ammo := $SlotAmmo/UIFrame/TextureRect/TexturePlaceholder
-onready var _equipped_ammo : TextureRect = $SlotAmmo/UIFrame/TextureRect/TextureEquipped
-onready var _placeholder_off_hand := $SlotOffHand/UIFrame/TextureRect/TexturePlaceholder
-onready var _equipped_off_hand : TextureRect = $SlotOffHand/UIFrame/TextureRect/TextureEquipped
-onready var _placeholder_boots := $SlotBoots/UIFrame/TextureRect/TexturePlaceholder
-onready var _equipped_boots : TextureRect = $SlotBoots/UIFrame/TextureRect/TextureEquipped
+#onready var _placeholder_helmet := $SlotHelmet/UIFrame/TextureRect/TexturePlaceholder
+#onready var _equipped_helmet : TextureRect = $SlotHelmet/UIFrame/TextureRect/TextureEquipped
+#onready var _placeholder_armor := $SlotArmor/UIFrame/TextureRect/TexturePlaceholder
+#onready var _equipped_armor : TextureRect = $SlotArmor/UIFrame/TextureRect/TextureEquipped
+#onready var _placeholder_gloves := $SlotGloves/UIFrame/TextureRect/TexturePlaceholder
+#onready var _equipped_gloves : TextureRect = $SlotGloves/UIFrame/TextureRect/TextureEquipped
+#onready var _placeholder_weapon := $SlotWeapon/UIFrame/TextureRect/TexturePlaceholder
+#onready var _equipped_weapon : TextureRect = $SlotWeapon/UIFrame/TextureRect/TextureEquipped
+#onready var _placeholder_ammo := $SlotAmmo/UIFrame/TextureRect/TexturePlaceholder
+#onready var _equipped_ammo : TextureRect = $SlotAmmo/UIFrame/TextureRect/TextureEquipped
+#onready var _placeholder_off_hand := $SlotOffHand/UIFrame/TextureRect/TexturePlaceholder
+#onready var _equipped_off_hand : TextureRect = $SlotOffHand/UIFrame/TextureRect/TextureEquipped
+#onready var _placeholder_boots := $SlotBoots/UIFrame/TextureRect/TexturePlaceholder
+#onready var _equipped_boots : TextureRect = $SlotBoots/UIFrame/TextureRect/TextureEquipped
 
 
 func _ready():
@@ -34,13 +34,13 @@ func _sync_equipped_items() -> void:
 #	_placeholder_armor.set_visible(not player.equipped_armor)
 #	_equipped_armor.set_visible(bool(player.equipped_armor))
 
-	_sync_item("helmet")
-	_sync_item("armor")
-	_sync_item("gloves")
-	_sync_item("weapon")
-	_sync_item("ammo")
-	_sync_item("off_hand")
-	_sync_item("boots")
+	#_sync_item("helmet")
+	#_sync_item("armor")
+	#_sync_item("gloves")
+	#_sync_item("weapon")
+	#_sync_item("ammo")
+	#_sync_item("off_hand")
+	#_sync_item("boots")
 
 func _sync_item(item_type_property_suffix : String) -> void:
 	var item : EntityItem = GameState.player_data.get("equipped_" + item_type_property_suffix)

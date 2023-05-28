@@ -1,16 +1,11 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Assets/Tiles/colored_tilemap_packed.png" type="Texture" id=1]
 [ext_resource path="res://Scenes/UI/UIInventoryScreen.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scripts/Player.gd" type="Script" id=3]
 [ext_resource path="res://Scripts/Game.gd" type="Script" id=4]
 [ext_resource path="res://Assets/Sprites/Player.png" type="Texture" id=5]
-[ext_resource path="res://Scenes/Game/ItemTiles/MagicSword.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Scenes/Game/ItemTiles/HunterArmor.tscn" type="PackedScene" id=7]
-[ext_resource path="res://Scenes/Game/ItemTiles/HunterBow.tscn" type="PackedScene" id=8]
-[ext_resource path="res://Scenes/Game/CollectableGoldTile.tscn" type="PackedScene" id=9]
-[ext_resource path="res://Scenes/Game/ItemTiles/HunterArrow.tscn" type="PackedScene" id=10]
-[ext_resource path="res://Scenes/Game/ItemTiles/BattleArrow.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Scenes/Game/ItemTiles/HunterBow.tscn" type="PackedScene" id=11]
 [ext_resource path="res://Assets/Sounds/inventory-close.ogg" type="AudioStream" id=12]
 [ext_resource path="res://Assets/Sounds/inventory-open.ogg" type="AudioStream" id=13]
 
@@ -54,24 +49,19 @@ tile_data = PoolIntArray( -196613, 0, 65537, -196612, 0, 65537, -196611, 0, 6553
 
 [node name="Items" type="Node2D" parent="."]
 
-[node name="HunterArmor" parent="Items" instance=ExtResource( 7 )]
-position = Vector2( 400, 416 )
-
-[node name="HunterBow" parent="Items" instance=ExtResource( 8 )]
+[node name="HunterBow" parent="Items" instance=ExtResource( 11 )]
 position = Vector2( 684, 280 )
 
-[node name="MagicSword" parent="Items" instance=ExtResource( 6 )]
+[node name="MagicSword" parent="Items" instance=ExtResource( 11 )]
 position = Vector2( 279, 296 )
 
-[node name="CollectableGoldTile" parent="Items" instance=ExtResource( 9 )]
+[node name="CollectableGoldTile" parent="Items" instance=ExtResource( 11 )]
 position = Vector2( 504, 288 )
-amount = 12
 
-[node name="CollectableGoldTile2" parent="Items" instance=ExtResource( 9 )]
+[node name="CollectableGoldTile2" parent="Items" instance=ExtResource( 11 )]
 position = Vector2( 260, 540 )
-amount = 45
 
-[node name="HunterArrow" parent="Items" instance=ExtResource( 10 )]
+[node name="HunterArrow" parent="Items" instance=ExtResource( 11 )]
 position = Vector2( 736, 352 )
 
 [node name="BattleArrow" parent="Items" instance=ExtResource( 11 )]
