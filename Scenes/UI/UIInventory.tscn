@@ -94,7 +94,7 @@ rect_min_size = Vector2( 1240, 480 )
 
 [node name="ControlItemsColumn" type="Control" parent="HBoxMain"]
 margin_right = 560.0
-margin_bottom = 400.0
+margin_bottom = 480.0
 rect_min_size = Vector2( 560, 400 )
 
 [node name="VBoxItemsColumn" type="VBoxContainer" parent="HBoxMain/ControlItemsColumn"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Scenes/UI/UIInventory.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Assets/UI/ButtonBackgrounds/white.png" type="Texture" id=2]
@@ -9,7 +9,6 @@
 [ext_resource path="res://Assets/UI/Icons/pouch.png" type="Texture" id=7]
 [ext_resource path="res://Assets/UI/Prompts/Tab_Key_Light.png" type="Texture" id=8]
 [ext_resource path="res://Assets/Fonts/DynamicFontRobotoBoldItalic.tres" type="DynamicFont" id=9]
-[ext_resource path="res://Scenes/UI/Elements/UICharacterStats.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Scripts/UI/UICharacterGold.gd" type="Script" id=11]
 
 [sub_resource type="ShaderMaterial" id=3]
@@ -123,14 +122,6 @@ margin_right = 90.0
 margin_bottom = 46.0
 custom_fonts/font = SubResource( 5 )
 text = "4456"
-
-[node name="UICharacterStats" parent="VBoxContainer/ControlHeader" instance=ExtResource( 10 )]
-anchor_top = 0.5
-anchor_bottom = 0.5
-margin_left = 60.0
-margin_top = -16.0
-margin_right = 300.0
-margin_bottom = 16.0
 
 [node name="UIInventory" parent="VBoxContainer" instance=ExtResource( 1 )]
 anchor_left = 0.0
