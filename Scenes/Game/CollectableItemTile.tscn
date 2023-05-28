@@ -1,7 +1,21 @@
 [gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Assets/Tiles/colored_tilemap_packed.png" type="Texture" id=1]
-[ext_resource path="res://Scripts/Game/CollectableItemTile.gd" type="Script" id=2]
+
+[sub_resource type="GDScript" id=6]
+script/source = "extends Area2D
+class_name CollectableItemTile
+
+export(Resource) var item setget ,get_item
+
+
+func get_item() -> EntityItem:
+	return item
+
+
+func collect() -> void:
+	queue_free()
+"
 
 [sub_resource type="AtlasTexture" id=4]
 atlas = ExtResource( 1 )
@@ -12,7 +26,7 @@ extents = Vector2( 4, 4 )
 
 [node name="CollectableItemTile" type="Area2D" groups=["Items"]]
 scale = Vector2( 5, 5 )
-script = ExtResource( 2 )
+script = SubResource( 6 )
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = SubResource( 4 )
