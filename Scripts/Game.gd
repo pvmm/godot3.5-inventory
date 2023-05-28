@@ -8,7 +8,7 @@ export(AudioStream) var audio_stream_close_inventory
 
 
 func _ready() -> void:	
-	show_inventory()
+	_ui_inventory_screen.set_visible(false)
 	
 	
 func _input(event: InputEvent) -> void:
