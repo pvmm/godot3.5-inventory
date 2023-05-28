@@ -27,9 +27,6 @@ font_data = ExtResource( 6 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 rect_min_size = Vector2( 1280, 720 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="TextureBlur" type="TextureRect" parent="."]
 material = SubResource( 3 )
@@ -144,9 +141,6 @@ theme = ExtResource( 5 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 color = Color( 0.686275, 0.686275, 0.686275, 0.164706 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="ColorRectSeparator" type="ColorRect" parent="VBoxContainer/ControlFooter"]
 anchor_right = 1.0

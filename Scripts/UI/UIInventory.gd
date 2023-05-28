@@ -10,9 +10,7 @@ export(AudioStream) var audio_stream_item_hover
 export(AudioStream) var audio_stream_item_pressed
 export(AudioStream) var audio_stream_item_equip
 export(AudioStream) var audio_stream_item_unequip
-export(AudioStream) var audio_stream_item_context_menu_cancel
 onready var _audio_player := $AudioStreamPlayer
-onready var _audio_player_context_menu := $UIContextMenuContainer/AudioStreamPlayer
 
 #
 # Category members
@@ -37,8 +35,6 @@ onready var _scroll_container := $HBoxMain/ControlItemsColumn/VBoxItemsColumn/HB
 onready var _item_grids_container := $HBoxMain/ControlItemsColumn/VBoxItemsColumn/HBoxInventoryItems/ScrollContainerItemGrids/HBoxItemGridsContainer
 onready var _button_left := $HBoxMain/ControlItemsColumn/VBoxItemsColumn/HBoxInventoryItems/ControlLeftColumn/ButtonLeft
 onready var _button_right := $HBoxMain/ControlItemsColumn/VBoxItemsColumn/HBoxInventoryItems/ControlRightColumn/ButtonRight
-onready var _context_menu_container := $UIContextMenuContainer
-onready var _context_menu := $UIContextMenuContainer/UIContextMenu
 onready var _ui_item_info := $HBoxMain/ControlInfoColumn/UIItemInfo
 
 var _grid_template := preload("res://Scenes/UI/Elements/GridInventoryItems.tscn")
@@ -62,8 +58,6 @@ func _ready() -> void:
 
 				
 func _reload() -> void:
-	_context_menu_container.set_visible(false)
-	
 	_reload_items()
 	yield(get_tree(), "idle_frame")
 	
@@ -356,13 +350,6 @@ func _on_button_item_mouse_entered(ui_inventory_item : Node) -> void:
 	
 func _on_button_item_mouse_exited(ui_inventory_item : Node) -> void:
 	if _is_scrolling: return	
-	
-	# Context menu is currently open for the same item
-	# from this button, so do not deselect the button if the mouse
-	# leaves the button
-	if _context_menu.get_ui_inventory_item() and _context_menu.get_ui_inventory_item() == ui_inventory_item:
-		return
-	
 	ui_inventory_item.deselect()	
 
 
@@ -374,10 +361,10 @@ func _on_button_item_mouse_pressed(ui_inventory_item : Node) -> void:
 
 func _on_inventory_item_pressed(item) -> void:
 	if GameState.player_check_is_item_equipped(item):
-		_play_audio_context_menu(audio_stream_item_unequip)
+		_play_audio(audio_stream_item_unequip)
 		GameState.player_unequip_item(item)
-	else:		
-		_play_audio_context_menu(audio_stream_item_equip)
+	else:
+		_play_audio(audio_stream_item_equip)
 		GameState.player_equip_item(item)
 
 
@@ -398,9 +385,3 @@ func _play_audio(stream : AudioStream) -> void:
 	if not stream: return
 	_audio_player.set_stream(stream)
 	_audio_player.play(0.0)
-
-
-func _play_audio_context_menu(stream : AudioStream) -> void:
-	if not stream: return
-	_audio_player_context_menu.set_stream(stream)
-	_audio_player_context_menu.play(0.0)

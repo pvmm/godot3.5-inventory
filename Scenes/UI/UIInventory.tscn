@@ -1,11 +1,10 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://Scripts/UI/UIInventory.gd" type="Script" id=1]
 [ext_resource path="res://Assets/UI/Icons/ArrowRight.png" type="Texture" id=2]
 [ext_resource path="res://Assets/Sounds/rollover6.ogg" type="AudioStream" id=3]
 [ext_resource path="res://Assets/DefaultTheme.tres" type="Theme" id=4]
 [ext_resource path="res://Assets/Sounds/switch_006.ogg" type="AudioStream" id=7]
-[ext_resource path="res://Scenes/UI/Elements/UIInventoryItemContextMenu.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Scenes/UI/Elements/UIItemInfo.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Assets/Sounds/switch_007.ogg" type="AudioStream" id=11]
 [ext_resource path="res://Assets/Sounds/cloth-inventory.wav" type="AudioStream" id=12]
@@ -76,7 +75,6 @@ audio_stream_item_hover = ExtResource( 13 )
 audio_stream_item_pressed = ExtResource( 7 )
 audio_stream_item_equip = ExtResource( 12 )
 audio_stream_item_unequip = ExtResource( 11 )
-audio_stream_item_context_menu_cancel = ExtResource( 11 )
 
 [node name="ColorRectBackground" type="ColorRect" parent="."]
 anchor_right = 1.0
@@ -213,24 +211,6 @@ margin_top = -338.0
 margin_right = 519.0
 margin_bottom = -158.0
 rect_min_size = Vector2( 520, 180 )
-
-[node name="UIContextMenuContainer" type="Control" parent="."]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="UIContextMenu" parent="UIContextMenuContainer" instance=ExtResource( 8 )]
-anchor_left = 0.0
-anchor_right = 0.0
-margin_left = 0.0
-margin_right = 240.0
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="UIContextMenuContainer"]
-stream = ExtResource( 3 )
-volume_db = -10.0
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 3 )
