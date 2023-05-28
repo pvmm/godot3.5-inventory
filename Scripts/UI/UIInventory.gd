@@ -14,14 +14,11 @@ export(AudioStream) var audio_stream_item_context_menu_cancel
 onready var _audio_player := $AudioStreamPlayer
 onready var _audio_player_context_menu := $UIContextMenuContainer/AudioStreamPlayer
 
-var _just_loaded := true
-
 #
 # Category members
 #
 onready var _grid_categories := $HBoxMain/ControlItemsColumn/VBoxItemsColumn/VBoxInventoryCategories/CenterContainer/GridContainer
 onready var _control_category_label_parent := $HBoxMain/ControlItemsColumn/VBoxItemsColumn/VBoxInventoryCategories/ControlCategoryLabelParent
-onready var _label_category_name : Label = $HBoxMain/ControlItemsColumn/VBoxItemsColumn/VBoxInventoryCategories/ControlCategoryLabelParent/LabelCategoryName
 onready var _timer_category_name : Timer = $HBoxMain/ControlItemsColumn/VBoxItemsColumn/VBoxInventoryCategories/ControlCategoryLabelParent/TimerCategoryName
 
 #var _ui_inventory_category := preload("res://Scenes/UI/Elements/UIInventoryCategory.tscn")
@@ -86,11 +83,6 @@ func _reload() -> void:
 		
 	yield(get_tree(), "idle_frame")
 
-	if _just_loaded:
-		_setup_context_menu()
-	
-	_just_loaded = false
-
 
 func _reload_categories() -> void:
 	# Clear all categories
@@ -128,7 +120,6 @@ func _reload_categories() -> void:
 
 func _set_active_category_display() -> void:
 	if _pages_to_category_displays.empty():
-		_label_category_name.set_visible(false)
 		return
 	
 	var category_display = _pages_to_category_displays[_current_scroll_page]
@@ -150,23 +141,12 @@ func _show_category_display_label(ui_inventory_category : Node = null) -> void:
 	if not ui_inventory_category:
 		if not _current_active_ui_inventory_category:
 			return
-			
-		ui_inventory_category = _current_active_ui_inventory_category 
 		
-	_label_category_name.set_text(ui_inventory_category.get_category().display_name)
-	
-	var button = ui_inventory_category.get_button()
+		ui_inventory_category = _current_active_ui_inventory_category 
 	
 	# We have to wait for a frame, otherwise button.get_global_position()
 	# would still return the local position instead of global position
 	yield(get_tree(), "idle_frame")
-	
-	var icon_center_global_x = button.get_global_position().x + button.get_rect().size.x / 2		
-	var label_half_width = _label_category_name.get_rect().size.x / 2
-	var label_position = Vector2(icon_center_global_x - label_half_width, _label_category_name.get_global_position().y)	
-
-	_label_category_name.set_global_position(label_position, true)	
-	_label_category_name.set_visible(true)
 	
 	ui_inventory_category.highlight(true)
 	
@@ -257,7 +237,7 @@ func _reload_items() -> void:
 					button.connect("mouse_entered", self, "_on_button_item_mouse_entered", [ui_inventory_item])
 					button.connect("mouse_exited", self, "_on_button_item_mouse_exited", [ui_inventory_item])
 					button.connect("pressed", self, "_on_button_item_mouse_pressed", [ui_inventory_item])
-	
+			
 			# Before moving to another CategoryDisplay, assign the
 			# starting page for the current CategoryDisplay
 			_category_displays_to_pages[category_display] = starting_page + 1
@@ -384,60 +364,21 @@ func _on_button_item_mouse_exited(ui_inventory_item : Node) -> void:
 		return
 	
 	ui_inventory_item.deselect()	
-	
-	
+
+
 func _on_button_item_mouse_pressed(ui_inventory_item : Node) -> void:
 	if _is_scrolling: return
 	ui_inventory_item.highlight()
-	
-	_play_audio(audio_stream_item_pressed)
-	_open_context_menu(ui_inventory_item)
+	_on_inventory_item_pressed(ui_inventory_item.get_item())
 
 
-func _setup_context_menu() -> void:
-	# Position Context Menu in the center of the inventory
-	# (aligned with the middle category icon)
-	
-	#var middle_idx = int(ceil(_grid_categories.get_child_count() / 2))
-	#var middle_category = _grid_categories.get_children()[middle_idx]
-	#var x = middle_category.get_global_position().x + (middle_category.get_size().x / 2) - (_context_menu.get_size().x / 2)
-	#_context_menu.set_deferred("rect_global_position", Vector2(x, _context_menu.get_global_position().y))
-
-	if not _context_menu.get_button_equip().is_connected("pressed", self, "_on_context_menu_button_equip_pressed"):
-		_context_menu.get_button_equip().connect("pressed", self, "_on_context_menu_button_equip_pressed")
-		_context_menu.get_button_cancel().connect("pressed", self, "_on_context_menu_button_cancel_pressed")
-
-
-func _open_context_menu(ui_inventory_item : Node) -> void:
-	_context_menu.set_ui_inventory_item(ui_inventory_item)
-	_context_menu_container.set_visible(true)
-	
-
-func _on_context_menu_button_equip_pressed() -> void:
-	if _context_menu.get_ui_inventory_item():
-		var item = _context_menu.get_ui_inventory_item().get_item()
-		
-		if GameState.player_check_is_item_equipped(item):
-			_play_audio_context_menu(audio_stream_item_unequip)
-			GameState.player_unequip_item(item)
-		else:		
-			_play_audio_context_menu(audio_stream_item_equip)
-			GameState.player_equip_item(item)
-			
-	_context_menu_close()
-
-
-func _on_context_menu_button_cancel_pressed() -> void:
-	_play_audio_context_menu(audio_stream_item_context_menu_cancel)
-	_context_menu_close()
-
-
-func _context_menu_close() -> void:
-	if _context_menu.get_ui_inventory_item():
-		_context_menu.get_ui_inventory_item().dehighlight()
-		_context_menu.set_ui_inventory_item(null)
-		
-	_context_menu_container.set_visible(false)
+func _on_inventory_item_pressed(item) -> void:
+	if GameState.player_check_is_item_equipped(item):
+		_play_audio_context_menu(audio_stream_item_unequip)
+		GameState.player_unequip_item(item)
+	else:		
+		_play_audio_context_menu(audio_stream_item_equip)
+		GameState.player_equip_item(item)
 
 
 func _show_item_info(item : EntityItem) -> void:
@@ -448,10 +389,6 @@ func _show_item_info(item : EntityItem) -> void:
 func _on_item_acquired(item : EntityItem) -> void:
 	_reload()
 	
-
-func _on_UIInventory_hide() -> void:
-	_context_menu_close()
-
 
 func _on_UIInventory_draw() -> void:		
 	_show_category_display_label()
